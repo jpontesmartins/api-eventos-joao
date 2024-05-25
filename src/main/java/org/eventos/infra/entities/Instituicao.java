@@ -1,4 +1,4 @@
-package org.eventos;
+package org.eventos.infra.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

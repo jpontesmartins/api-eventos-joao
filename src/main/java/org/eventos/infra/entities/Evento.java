@@ -1,4 +1,4 @@
-package org.eventos;
+package org.eventos.infra.entities;
 
 import java.util.Date;
 

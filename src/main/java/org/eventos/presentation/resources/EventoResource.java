@@ -1,8 +1,10 @@
-package org.eventos;
+package org.eventos.presentation.resources;
 
 import java.util.List;
 
-import org.eventos.dtos.EventoDTO;
+import org.eventos.domain.dtos.EventoDTO;
+import org.eventos.infra.entities.Evento;
+import org.eventos.infra.entities.Instituicao;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

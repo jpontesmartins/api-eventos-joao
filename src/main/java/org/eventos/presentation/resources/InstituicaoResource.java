@@ -1,6 +1,9 @@
-package org.eventos;
+package org.eventos.presentation.resources;
 
 import java.util.List;
+
+import org.eventos.domain.usecases.ListInstituicoesUseCase;
+import org.eventos.infra.entities.Instituicao;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

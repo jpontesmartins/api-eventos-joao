@@ -1,4 +1,4 @@
-package org.eventos.dtos;
+package org.eventos.domain.dtos;
 
 import java.util.Date;
 

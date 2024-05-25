@@ -3,16 +3,14 @@ package org.eventos;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 
+import org.eventos.domain.usecases.ListInstituicoesUseCase;
+import org.eventos.infra.entities.Instituicao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.isA;
-import static org.mockito.ArgumentMatchers.anyCollection;
-import static org.mockito.ArgumentMatchers.anyList;
-
 import java.util.ArrayList;
 import java.util.List;
 
