@@ -24,9 +24,11 @@ public class EventoResource {
     @Inject
     EntityManager entityManager;
 
+    // TODO: criar um service/usecase pra regra de negócio consultando o banco
+    // ai vai dar pra criar um teste e mockar o service/usecase
+
     @GET
     public List<Evento> eventos() {
-
         List<Evento> eventos = entityManager.createNamedQuery("Evento.findAll", Evento.class)
                 .getResultList();
 
