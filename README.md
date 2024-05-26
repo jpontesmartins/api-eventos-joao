@@ -1,25 +1,48 @@
 # api-eventos-joao
 
+
+## Ambiente local
+
+- JDK: GraalVM JDK 22
+- Maven: 3.9.6
+
 ## Início
 
 1. Clonar `api-evento-joao`
 
-```
-    $ git clone https://github.com/jpontesmartins/api-eventos-joao
-```
+    ```
+        $ git clone https://github.com/jpontesmartins/api-eventos-joao
+    ```
 
 2. Compilar projeto utilizando o maven
-```
-    $ mvn compile quarkus:dev
-```
+
+    ```
+        $ mvn compile quarkus:dev
+    ```
 
 3. Banco de dados
-- 3.1. PostgreSQL
-- 3.2 H2
 
+- H2
+    - Ao subir a aplicação com o comando acima, a base H2 já contém dois registros de Instituicao.  
+    Para verificar os dados, executar o `GET` para o endpoint `/instituicoes`, como mostrado abaixo:
 
+        ```
+            $ curl --location 'localhost:8080/instituicoes'
+        ```
 
-
+        O resultado deve ser algo como (beautified):
+        ```
+            [
+                {
+                    "id": 1,
+                    "nome": "Prefeitura"
+                },
+                {
+                    "id": 2,
+                    "nome": "Escola"
+                }
+            ]
+        ```
 
 ---
 
