@@ -27,7 +27,6 @@ public class HbnEventoRepository implements EventoRepository {
     @SuppressWarnings("unchecked")
     @Override
     public List<Evento> findBetweenDataInicialAndDataFinal() {
-        System.out.println("Eventos com o dia de hoje dentro do período vigente");
         String query = " SELECT e FROM Evento e WHERE :hoje BETWEEN e.dataInicial AND e.dataFinal ";
         List<Evento> eventos = entityManager.createQuery(query).setParameter("hoje", new Date()).getResultList();
         return eventos;

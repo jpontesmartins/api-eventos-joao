@@ -50,4 +50,8 @@
             ]
         ```
 
-        
+### 5. Execução da tarefa agendada
+- Após o horário para a exceução da tarefa agendada, pode-se realizar um cURL para consultar todos os eventos e ver quais tiveram seu status alterado.
+```
+    $ curl --location 'localhost:8080/eventos'
+```

@@ -12,9 +12,7 @@ public class Instituicao {
     @GeneratedValue
     public Integer id;
     public String nome;
-
-    // @OneToMany(mappedBy="instituicao")
-	// public Set<Evento> eventos;
+    public String tipo;
 
     public Integer getId() {
         return id;
@@ -32,12 +30,14 @@ public class Instituicao {
         this.nome = nome;
     }
 
-    // public Set<Evento> getEventos() {
-    //     return eventos;
-    // }
+    public String getTipo() {
+        return tipo;
+    }
 
-    // public void setEventos(Set<Evento> eventos) {
-    //     this.eventos = eventos;
-    // }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    
 
 }
