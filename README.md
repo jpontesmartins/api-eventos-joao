@@ -1,5 +1,28 @@
 # api-eventos-joao
 
+## Início
+
+1. Clonar `api-evento-joao`
+
+```
+    $ git clone https://github.com/jpontesmartins/api-eventos-joao
+```
+
+2. Compilar projeto utilizando o maven
+```
+    $ mvn compile quarkus:dev
+```
+
+3. Banco de dados
+- 3.1. PostgreSQL
+- 3.2 H2
+
+
+
+
+
+---
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .

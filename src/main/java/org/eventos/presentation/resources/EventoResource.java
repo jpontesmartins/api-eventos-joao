@@ -37,6 +37,14 @@ public class EventoResource {
         return eventos;
     }
 
+    // @GET
+    // public List<Evento> eventosNoPeriodo() {
+    //     List<Evento> eventos = entityManager.createNamedQuery("Evento.findAll", Evento.class)
+    //             .getResultList();
+
+    //     return eventos;
+    // }
+
     
     @POST
     @Transactional
