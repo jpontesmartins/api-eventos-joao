@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.containsString;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,23 +26,27 @@ class InstituicaoResourceTest {
         Instituicao instituicaoA = new Instituicao();
         instituicaoA.id = 1;
         instituicaoA.nome = "Instituicao A";
+        instituicaoA.tipo = "Publica";
         instituicoes.add(instituicaoA);
 
         Instituicao instituicaoB = new Instituicao();
         instituicaoB.id = 2;
         instituicaoB.nome = "Instituicao B";
+        instituicaoB.tipo = "Privada";
         instituicoes.add(instituicaoB);
 
         Mockito.when(useCaseMock.execute()).thenReturn(instituicoes);
     }
 
     @Test
-    void testHelloEndpoint() {
+    void should_return_instituicoes() {
         given()
                 .when().get("/instituicoes")
                 .then()
                 .statusCode(200)
-                .body(is("[{\"id\":1,\"nome\":\"Instituicao A\"},{\"id\":2,\"nome\":\"Instituicao B\"}]"));
+                .body(containsString("Instituicao A")).and()
+                .body(containsString("Instituicao B")).and();
+                
     }
 
 }

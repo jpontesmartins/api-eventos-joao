@@ -47,7 +47,8 @@ public class EventoResource {
     }
 
     private boolean validateDto(EventoDTO eventoDto) {
-        if (eventoDto.dataInicial.after(eventoDto.dataFinal)) {
+        if (eventoDto.dataInicial == null || eventoDto.dataFinal == null 
+                || eventoDto.dataInicial.after(eventoDto.dataFinal)) {
             return false;
         }
         if (eventoDto.instituicao == null || eventoDto.instituicao == 0) {

@@ -85,4 +85,68 @@ class EventoResourceTest {
 
     }
 
+    @Test
+    void should_return_error_DTO_without_nome() {
+        EventoDTO eventoDto = new EventoDTO();
+        eventoDto.ativo = false;
+        eventoDto.dataInicial = new Date();
+        eventoDto.dataFinal = new Date();
+        eventoDto.instituicao = 1;
+
+        given()
+                .contentType(ContentType.JSON)
+                .when().body(eventoDto)
+                .post("/eventos")
+                .then().statusCode(400);
+
+    }
+
+    @Test
+    void should_return_error_DTO_without_instituicao() {
+        EventoDTO eventoDto = new EventoDTO();
+        eventoDto.ativo = false;
+        eventoDto.dataInicial = new Date();
+        eventoDto.dataFinal = new Date();
+        eventoDto.nome = "Nome";
+
+        given()
+                .contentType(ContentType.JSON)
+                .when().body(eventoDto)
+                .post("/eventos")
+                .then().statusCode(400);
+
+    }
+
+    @Test
+    void should_return_error_DTO_without_dataInicial() {
+        EventoDTO eventoDto = new EventoDTO();
+        eventoDto.ativo = false;
+        eventoDto.dataFinal = new Date();
+        eventoDto.instituicao = 1;
+
+        given()
+                .contentType(ContentType.JSON)
+                .when().body(eventoDto)
+                .post("/eventos")
+                .then().statusCode(400);
+
+    }
+
+    @Test
+    void should_return_error_DTO_without_dataFinal() {
+        EventoDTO eventoDto = new EventoDTO();
+        eventoDto.ativo = false;
+        eventoDto.dataInicial = new Date();
+        eventoDto.instituicao = 1;
+
+        given()
+                .contentType(ContentType.JSON)
+                .when().body(eventoDto)
+                .post("/eventos")
+                .then().statusCode(400);
+
+    }
+
+
+
 }
