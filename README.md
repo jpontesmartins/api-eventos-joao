@@ -41,11 +41,13 @@
             [
                 {
                     "id": 1,
-                    "nome": "Prefeitura"
+                    "nome": "Prefeitura",
+                    "tipo": "Publica",
                 },
                 {
                     "id": 2,
-                    "nome": "Escola"
+                    "nome": "Escola",
+                    "tipo": "Particular"
                 }
             ]
         ```
