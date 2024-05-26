@@ -42,7 +42,7 @@
                 {
                     "id": 1,
                     "nome": "Prefeitura",
-                    "tipo": "Publica",
+                    "tipo": "Publica"
                 },
                 {
                     "id": 2,
