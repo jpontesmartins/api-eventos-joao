@@ -2,7 +2,7 @@ package org.eventos.data.usecases;
 
 import org.eventos.data.interfaces.EventoRepository;
 import org.eventos.data.interfaces.InstituicaoRepository;
-import org.eventos.domain.dtos.EventoDTO;
+import org.eventos.domain.models.EventoModel;
 import org.eventos.domain.usecases.CreateEventoUseCase;
 import org.eventos.infra.entities.Evento;
 import org.eventos.infra.entities.Instituicao;
@@ -20,20 +20,21 @@ public class CreateEventoUseCaseImpl implements CreateEventoUseCase {
     InstituicaoRepository instituicaoRepository;
 
     @Override
-    public Evento execute(EventoDTO eventoDto) {
+    public EventoModel execute(EventoModel eventoModel) {
 
-        Instituicao instituicao = instituicaoRepository.findById(eventoDto.instituicao);
+        Instituicao instituicao = instituicaoRepository.findById(eventoModel.getInstituicao());
 
         Evento evento = new Evento();
         evento.setAtivo(false);
-        evento.setDataInicial(eventoDto.dataInicial);
-        evento.setDataFinal(eventoDto.dataFinal);
+        evento.setDataInicial(eventoModel.getDataInicial());
+        evento.setDataFinal(eventoModel.getDataFinal());
         evento.setInstituicao(instituicao);
-        evento.setNome(eventoDto.nome);
-
+        evento.setNome(eventoModel.getNome());
+        
         repository.save(evento);
 
-        return evento;
+        EventoModel modelRetorno = evento.toModel();
+        return modelRetorno;
 
     }
     

@@ -17,9 +17,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.eventos.domain.dtos.EventoDTO;
+import org.eventos.domain.models.EventoModel;
 import org.eventos.domain.usecases.CreateEventoUseCase;
 import org.eventos.domain.usecases.ListEventosUseCase;
-import org.eventos.infra.entities.Evento;
 import org.eventos.infra.entities.Instituicao;
 
 @QuarkusTest
@@ -33,8 +33,8 @@ class EventoResourceTest {
 
     @BeforeEach
     public void setup() {
-        List<Evento> eventos = new ArrayList<Evento>();
-        Evento evento = new Evento();
+        List<EventoModel> eventos = new ArrayList<EventoModel>();
+        EventoModel evento = new EventoModel();
         evento.setAtivo(false);
         evento.setDataInicial(new Date());
         evento.setDataFinal(new Date());
@@ -44,7 +44,7 @@ class EventoResourceTest {
         Instituicao instituicao = new Instituicao();
         instituicao.setId(1);
         instituicao.setNome("Alguma Instituicao");
-        evento.setInstituicao(instituicao);
+        evento.setInstituicao(instituicao.getId());
         eventos.add(evento);
 
         Mockito.when(listEventos.execute()).thenReturn(eventos);
@@ -80,8 +80,7 @@ class EventoResourceTest {
                 .when().body(eventoDto)
                 .post("/eventos")
                 .then()
-                .body(containsString("Alguma Instituicao")).and()
-                .body(containsString("Nome do evento")).and();
+                .body(containsString("Nome do evento"));
 
     }
 
@@ -146,7 +145,5 @@ class EventoResourceTest {
                 .then().statusCode(400);
 
     }
-
-
 
 }

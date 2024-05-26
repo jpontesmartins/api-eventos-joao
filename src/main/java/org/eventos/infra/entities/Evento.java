@@ -2,6 +2,8 @@ package org.eventos.infra.entities;
 
 import java.util.Date;
 
+import org.eventos.domain.models.EventoModel;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -24,7 +26,19 @@ public class Evento {
 
     @ManyToOne(targetEntity = Instituicao.class)
     @JoinColumn(name = "instituicao_id")
-    public Instituicao instituicao;
+    private Instituicao instituicao;
+
+
+    public EventoModel toModel() {
+        EventoModel model = new EventoModel();
+        model.setAtivo(this.ativo);
+        model.setDataInicial(this.dataInicial);
+        model.setDataFinal(this.dataFinal);
+        model.setInstituicao(this.instituicao.getId());
+        model.setNome(this.nome);
+
+        return model;
+    }
 
     public Integer getId() {
         return id;

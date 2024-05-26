@@ -1,11 +1,12 @@
 package org.eventos.presentation.resources;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eventos.domain.dtos.EventoDTO;
+import org.eventos.domain.models.EventoModel;
 import org.eventos.domain.usecases.CreateEventoUseCase;
 import org.eventos.domain.usecases.ListEventosUseCase;
-import org.eventos.infra.entities.Evento;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -29,34 +30,29 @@ public class EventoResource {
     ListEventosUseCase listEventosUseCase;
 
     @GET
-    public List<Evento> eventos() {
-        List<Evento> eventos = listEventosUseCase.execute();
-        return eventos;
+    public List<EventoDTO> eventos() {
+        List<EventoModel> eventos = listEventosUseCase.execute();
+        
+        List<EventoDTO> eventosDto = new ArrayList<EventoDTO>();
+        for (EventoModel eventoModel : eventos) {
+            eventosDto.add(eventoModel.toDTO());
+        }
+        return eventosDto;
     }
 
     @POST
     @Transactional
     public Response create(EventoDTO eventoDto) throws Exception {
-        if (!this.validateDto(eventoDto)) {
+        EventoModel eventoModel = new EventoModel(eventoDto);
+        if (!eventoModel.validate()) {
             return Response.status(400, "Preencha corretamente os campos").build();
         }
+        
+        eventoModel = createEventoUseCase.execute(eventoModel);
+        
+        EventoDTO createdEventoDto = eventoModel.toDTO();
 
-        Evento evento = createEventoUseCase.execute(eventoDto);
-
-        return Response.ok(evento).status(201).build();
+        return Response.ok(createdEventoDto).status(201).build();
     }
 
-    private boolean validateDto(EventoDTO eventoDto) {
-        if (eventoDto.dataInicial == null || eventoDto.dataFinal == null 
-                || eventoDto.dataInicial.after(eventoDto.dataFinal)) {
-            return false;
-        }
-        if (eventoDto.instituicao == null || eventoDto.instituicao == 0) {
-            return false;
-        }
-        if (eventoDto.nome == null || eventoDto.nome.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
 }
