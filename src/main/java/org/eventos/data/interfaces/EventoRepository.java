@@ -13,5 +13,7 @@ public interface EventoRepository {
     public List<Evento> findOutsideRangeDataInicialAndDataFinal();
 
     public void update(Evento evento);
+
+    public void save(Evento evento);
     
 }

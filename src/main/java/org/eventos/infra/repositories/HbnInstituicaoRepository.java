@@ -23,5 +23,11 @@ public class HbnInstituicaoRepository implements InstituicaoRepository {
             .getResultList();
         return instituicoes;
     }
+
+    @Override
+    public Instituicao findById(int id) {
+        Instituicao instituicao = entityManager.find( Instituicao.class, id);
+        return instituicao;
+    }
     
 }

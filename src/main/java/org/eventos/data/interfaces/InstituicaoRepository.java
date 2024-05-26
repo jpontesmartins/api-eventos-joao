@@ -8,5 +8,7 @@ public interface InstituicaoRepository {
 
     public List<Instituicao> findAll();
 
+    public Instituicao findById(int id);
+
     
 }

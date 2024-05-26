@@ -47,5 +47,10 @@ public class HbnEventoRepository implements EventoRepository {
     public void update(Evento evento) {
         this.entityManager.merge(evento);
     }
+
+    @Override
+    public void save(Evento evento) {
+        this.entityManager.persist(evento);
+    }
     
 }

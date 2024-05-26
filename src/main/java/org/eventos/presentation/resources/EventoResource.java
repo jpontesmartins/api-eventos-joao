@@ -3,12 +3,11 @@ package org.eventos.presentation.resources;
 import java.util.List;
 
 import org.eventos.domain.dtos.EventoDTO;
+import org.eventos.domain.usecases.CreateEventoUseCase;
+import org.eventos.domain.usecases.ListEventosUseCase;
 import org.eventos.infra.entities.Evento;
-import org.eventos.infra.entities.Instituicao;
-
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -24,58 +23,46 @@ import jakarta.ws.rs.core.Response;
 public class EventoResource {
 
     @Inject
-    EntityManager entityManager;
+    CreateEventoUseCase createEventoUseCase;
 
-    // TODO: criar um service/usecase pra regra de negócio consultando o banco
-    // ai vai dar pra criar um teste e mockar o service/usecase
+    @Inject
+    ListEventosUseCase listEventosUseCase;
 
     @GET
     public List<Evento> eventos() {
-        List<Evento> eventos = entityManager.createNamedQuery("Evento.findAll", Evento.class)
-                .getResultList();
-
+        List<Evento> eventos = listEventosUseCase.execute();
         return eventos;
     }
 
-    // @GET
-    // public List<Evento> eventosNoPeriodo() {
-    //     List<Evento> eventos = entityManager.createNamedQuery("Evento.findAll", Evento.class)
-    //             .getResultList();
-
-    //     return eventos;
-    // }
-
-    
     @POST
     @Transactional
     public Response create(EventoDTO eventoDto) throws Exception {
+        if (!this.validateDto(eventoDto)) {
+            return Response.status(400, "Preencha corretamente os campos").build();
+        }
+
+        Evento evento = createEventoUseCase.execute(eventoDto);
+
+        return Response.ok(evento).status(201).build();
+    }
+
+    private boolean validateDto(EventoDTO eventoDto) {
         System.out.println("Validar os dados do DTO");
         System.out.println(eventoDto.nome);
         System.out.println(eventoDto.dataInicial);
         System.out.println(eventoDto.dataFinal);
         System.out.println(eventoDto.instituicao);
 
-        //validacoes de datas, nome, instituicao
         if (eventoDto.dataInicial.after(eventoDto.dataFinal)) {
-            return Response.status(400, "A data final deve ser posterior a data inicial").build();
+            return false;
         }
         if (eventoDto.instituicao == null || eventoDto.instituicao == 0) {
-            return Response.status(400, "O campo Instituicao deve ser preenchido").build();
+            return false;
         }
         if (eventoDto.nome == null || eventoDto.nome.isEmpty()) {
-            return Response.status(400, "O campo Nome deve ser preenchido") .build();
+            return false;
         }
 
-        Instituicao instituicao = entityManager.find(Instituicao.class, eventoDto.instituicao);
-
-        Evento evento = new Evento();
-        evento.setAtivo(false);
-        evento.setDataInicial(eventoDto.dataInicial);
-        evento.setDataFinal(eventoDto.dataFinal);
-        evento.setInstituicao(instituicao); 
-        evento.setNome(eventoDto.nome);
-
-        entityManager.persist(evento);
-        return Response.ok(evento).status(201).build();
+        return true;
     }
 }
