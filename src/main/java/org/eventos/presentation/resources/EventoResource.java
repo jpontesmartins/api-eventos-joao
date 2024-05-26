@@ -47,12 +47,6 @@ public class EventoResource {
     }
 
     private boolean validateDto(EventoDTO eventoDto) {
-        System.out.println("Validar os dados do DTO");
-        System.out.println(eventoDto.nome);
-        System.out.println(eventoDto.dataInicial);
-        System.out.println(eventoDto.dataFinal);
-        System.out.println(eventoDto.instituicao);
-
         if (eventoDto.dataInicial.after(eventoDto.dataFinal)) {
             return false;
         }
@@ -62,7 +56,6 @@ public class EventoResource {
         if (eventoDto.nome == null || eventoDto.nome.isEmpty()) {
             return false;
         }
-
         return true;
     }
 }

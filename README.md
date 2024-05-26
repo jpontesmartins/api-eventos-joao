@@ -8,19 +8,15 @@
 
 ## Início
 
-1. Clonar `api-evento-joao`
+### 1. Clonar `api-eventos-joao`
 
-    ```
-        $ git clone https://github.com/jpontesmartins/api-eventos-joao
-    ```
+    $ git clone https://github.com/jpontesmartins/api-eventos-joao
 
-2. Compilar projeto utilizando o maven
+### 2. Compilar projeto utilizando o maven
 
-    ```
-        $ mvn compile quarkus:dev
-    ```
+    $ mvn compile quarkus:dev
 
-3. Banco de dados
+### 3. Banco de dados
 
 - H2
     - Ao subir a aplicação com o comando acima, a base H2 já contém dois registros de Instituicao.  
@@ -44,7 +40,17 @@
             ]
         ```
 
+
+### 4. Agendador
+
+- Configurar a expressão cron do agendador no `application.properties`
+- No exemplo abaixo ele está rodando todos os dias as 10:55 da manhã
+```
+cron.expr=0 55 10 * * ?
+```
+
 ---
+
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
